@@ -46,136 +46,270 @@ CLASS_EMOJIS = {
 }
 
 # ============================================================
-# ESTILOS
+# ESTILOS — Interfaz de visión artificial premium
 # ============================================================
 st.markdown(
     """
     <style>
+    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+
     :root {
-        --bg: #07111f;
-        --panel: #0e1b2f;
-        --panel-2: #111f36;
-        --line: #223654;
-        --text: #eef5ff;
-        --muted: #9fb1c9;
-        --accent: #5eead4;
-        --accent-2: #60a5fa;
-        --danger: #fb7185;
+        --bg: #060d1a;
+        --panel: rgba(15, 26, 46, .55);
+        --panel-solid: #0d1730;
+        --line: rgba(125, 211, 252, .12);
+        --line-strong: rgba(34, 211, 238, .30);
+        --text: #eaf3ff;
+        --muted: #93a7c7;
+        --accent: #22d3ee;
+        --accent-2: #3b82f6;
+        --valid: #34d399;
+        --warn: #fbbf24;
+        --danger: #f87171;
     }
 
     .stApp {
         background:
-            radial-gradient(circle at 10% 0%, rgba(96,165,250,.16), transparent 27%),
-            radial-gradient(circle at 90% 10%, rgba(94,234,212,.12), transparent 25%),
-            linear-gradient(180deg, #06101d 0%, #081525 45%, #07111f 100%);
+            radial-gradient(1150px 520px at 12% -6%, rgba(59,130,246,.17), transparent 55%),
+            radial-gradient(950px 480px at 90% 8%, rgba(34,211,238,.10), transparent 50%),
+            radial-gradient(1200px 720px at 50% 112%, rgba(59,130,246,.09), transparent 62%),
+            linear-gradient(180deg, #050b16 0%, #060d1a 55%, #050a14 100%);
         color: var(--text);
     }
 
     .block-container {
-        max-width: 1180px;
-        padding-top: 2.2rem;
-        padding-bottom: 3rem;
+        max-width: 1220px;
+        padding-top: 2.1rem;
+        padding-bottom: 2.4rem;
     }
 
-    [data-testid="stHeader"] {
-        background: rgba(7,17,31,.78);
+    [data-testid="stHeader"] { background: transparent; }
+
+    ::-webkit-scrollbar { width: 10px; height: 10px; }
+    ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.22); border-radius: 999px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+
+    .stApp, .stMarkdown p, .stMarkdown li {
+        font-family: 'Inter', system-ui, -apple-system, sans-serif;
+    }
+    h1, h2, h3, .card h3, .hero h1 {
+        font-family: 'Space Grotesk', 'Inter', sans-serif;
+        letter-spacing: -.01em;
     }
 
+    /* ===== HERO ===== */
     .hero {
-        padding: 28px 30px;
-        border: 1px solid rgba(148,163,184,.18);
-        border-radius: 26px;
-        background:
-            linear-gradient(135deg, rgba(14,27,47,.94), rgba(12,29,51,.76));
-        box-shadow: 0 25px 60px rgba(0,0,0,.24);
-        margin-bottom: 22px;
+        position: relative;
+        overflow: hidden;
+        padding: 40px 44px 36px;
+        border: 1px solid var(--line);
+        border-radius: 28px;
+        background: linear-gradient(135deg, rgba(16,28,52,.86), rgba(9,18,36,.74));
+        box-shadow: 0 30px 70px rgba(2,6,14,.5), inset 0 1px 0 rgba(255,255,255,.04);
+        margin-bottom: 26px;
     }
-
+    .hero::before {
+        content: "";
+        position: absolute; top: -150px; right: -130px;
+        width: 400px; height: 400px;
+        background: radial-gradient(circle, rgba(34,211,238,.18), transparent 62%);
+        pointer-events: none;
+    }
+    .hero::after {
+        content: "";
+        position: absolute; bottom: -170px; left: -110px;
+        width: 380px; height: 380px;
+        background: radial-gradient(circle, rgba(59,130,246,.15), transparent 62%);
+        pointer-events: none;
+    }
+    .hero-top { position: relative; display: flex; align-items: center; gap: 16px; }
+    .logo-mark {
+        width: 58px; height: 58px; border-radius: 18px;
+        display: grid; place-items: center; flex: none;
+        background: linear-gradient(135deg, rgba(34,211,238,.22), rgba(59,130,246,.16));
+        border: 1px solid var(--line-strong);
+        box-shadow: 0 12px 30px rgba(34,211,238,.16);
+    }
     .badge {
-        display: inline-block;
-        padding: 7px 11px;
-        border-radius: 999px;
-        color: #d9fffb;
-        background: rgba(94,234,212,.10);
-        border: 1px solid rgba(94,234,212,.26);
-        font-size: .80rem;
-        font-weight: 700;
-        letter-spacing: .04em;
-        text-transform: uppercase;
+        display: inline-flex; align-items: center; gap: 8px;
+        padding: 8px 14px; border-radius: 999px;
+        color: #c5fbff;
+        background: rgba(34,211,238,.10);
+        border: 1px solid rgba(34,211,238,.28);
+        font-size: .76rem; font-weight: 600;
+        letter-spacing: .06em; text-transform: uppercase;
     }
-
     .hero h1 {
-        font-size: clamp(2rem, 4vw, 3.4rem);
-        line-height: 1.04;
-        margin: 14px 0 10px;
-        color: #f8fbff;
+        position: relative;
+        font-size: clamp(2.3rem, 4.5vw, 3.5rem);
+        line-height: 1.02; margin: 22px 0 10px;
+        color: #f7fbff; font-weight: 700;
     }
-
-    .hero p {
-        color: var(--muted);
-        font-size: 1.04rem;
-        margin: 0;
-        max-width: 820px;
+    .hero h1 .accent { color: var(--accent); }
+    .hero-sub {
+        position: relative;
+        color: var(--muted); font-size: 1.12rem; margin: 0;
     }
-
+    .hero-foot {
+        position: relative;
+        display: flex; flex-wrap: wrap; gap: 8px 20px;
+        margin-top: 22px; color: #7f94b4; font-size: .82rem;
+    }
+    .hero-foot span { display: inline-flex; align-items: center; gap: 7px; }
+    .hero-foot .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
+    /* ===== CARDS / PANELES ===== */
     .card {
-        border: 1px solid rgba(148,163,184,.16);
-        border-radius: 22px;
-        background: linear-gradient(145deg, rgba(14,27,47,.92), rgba(10,22,39,.88));
-        padding: 22px;
-        box-shadow: 0 18px 45px rgba(0,0,0,.18);
+        background: linear-gradient(160deg, rgba(18,31,56,.82), rgba(10,20,38,.72));
+        border: 1px solid var(--line);
+        border-radius: 24px;
+        padding: 26px;
+        box-shadow: 0 24px 54px rgba(2,6,14,.42), inset 0 1px 0 rgba(255,255,255,.03);
         height: 100%;
     }
-
-    .card h3 {
-        margin-top: 0;
-        color: #f8fbff;
+    .card h3 { color: #f4f9ff; margin-top: 6px; }
+    .section-step {
+        display: inline-flex; align-items: center; gap: 8px;
+        color: var(--accent); font-size: .72rem; font-weight: 700;
+        letter-spacing: .08em; text-transform: uppercase;
     }
 
-    .mini {
-        color: var(--muted);
-        font-size: .92rem;
-        line-height: 1.55;
+    /* Uploader */
+    [data-testid="stFileUploader"] { padding: 4px; }
+    [data-testid="stFileUploaderDropzone"] {
+        background: linear-gradient(180deg, rgba(34,211,238,.05), rgba(255,255,255,.01)) !important;
+        border: 1.5px dashed rgba(34,211,238,.35) !important;
+        border-radius: 20px !important;
+        min-height: 250px;
+        display: flex; align-items: center; justify-content: center;
+        transition: border-color .2s ease, background .2s ease;
+    }
+    [data-testid="stFileUploaderDropzone"]:hover {
+        border-color: rgba(34,211,238,.65) !important;
+        background: rgba(34,211,238,.07) !important;
     }
 
-    .result-title {
-        font-size: 2rem;
-        font-weight: 800;
-        color: #f8fbff;
-        margin-top: 4px;
+    /* Cámara */
+    [data-testid="stCameraInput"] {
+        background: linear-gradient(160deg, rgba(18,31,56,.8), rgba(10,20,38,.7));
+        border: 1px solid var(--line);
+        border-radius: 20px; overflow: hidden; padding: 8px;
+    }
+    [data-testid="stCameraInputButton"] {
+        background: linear-gradient(135deg, #22d3ee, #3b82f6) !important;
+        border: none !important; color: #04222b !important;
+        border-radius: 12px !important; font-weight: 700;
     }
 
-    .confidence {
-        color: #9ef7eb;
-        font-size: 1.05rem;
-        font-weight: 700;
+    /* Radio segmentada */
+    [role="radiogroup"] { gap: 8px !important; }
+    [role="radiogroup"] > label {
+        background: rgba(148,163,184,.05);
+        border: 1px solid rgba(148,163,184,.14);
+        border-radius: 12px !important;
+        padding: 10px 14px;
+        transition: all .2s ease;
     }
+    [role="radiogroup"] > label:hover { border-color: rgba(34,211,238,.4); }
+    [role="radiogroup"] > label > [data-testid="stMarkdownContainer"] + div { display: none; }
 
+    /* Slider y Toggle */
+    .stSlider [data-baseweb="slider"] div[role="slider"] { background: #22d3ee !important; }
+    .stSlider [data-testid="stSliderThumbValue"] { color: #cfe9ff !important; }
+    .stCheckbox label span:first-child { border-radius: 999px !important; }
+
+    /* Sidebar */
+    [data-testid="stSidebar"] {
+        background: linear-gradient(180deg, rgba(8,15,28,.96), rgba(6,12,23,.96));
+        border-right: 1px solid var(--line);
+    }
+    [data-testid="stSidebar"] .block-container { padding-top: 1.6rem; padding-bottom: 2rem; }
+    .side-brand {
+        display: inline-flex; align-items: center; gap: 10px;
+        font-family: 'Space Grotesk'; font-size: 1.18rem; font-weight: 700; color: #f4f9ff;
+    }
+    .side-sub { color: var(--muted); font-size: .85rem; margin: 2px 0 20px; }
+    .side-title {
+        color: var(--muted); font-size: .72rem; font-weight: 700;
+        letter-spacing: .08em; text-transform: uppercase; margin: 4px 0 8px;
+    }
+    .model-chip {
+        display: flex; align-items: center; gap: 10px;
+        padding: 10px 12px; border-radius: 14px;
+        background: rgba(34,211,238,.06); border: 1px solid rgba(34,211,238,.18);
+        font-size: .82rem; color: #cfe9ff; margin-bottom: 8px;
+    }
+    .model-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--valid); box-shadow: 0 0 10px var(--valid); }
+
+    /* ===== RESULTADO ===== */
+    .result-class-row { display: flex; align-items: center; gap: 16px; margin: 6px 0 20px; }
+    .result-emoji {
+        width: 66px; height: 66px; border-radius: 20px; flex: none;
+        display: grid; place-items: center; font-size: 2.1rem;
+        background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(59,130,246,.12));
+        border: 1px solid var(--line-strong);
+        box-shadow: 0 12px 28px rgba(34,211,238,.14);
+    }
+    .result-label { color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
+    .result-class { font-family: 'Space Grotesk'; font-size: 2.1rem; font-weight: 700; color: #f7fbff; line-height: 1.05; }
+    .conf-line { display: flex; justify-content: space-between; align-items: baseline; width: 100%; }
+    .conf-label { color: var(--muted); font-size: .9rem; }
+    .conf-value { font-family: 'Space Grotesk'; font-size: 1.9rem; font-weight: 700; color: var(--accent); }
+    .gauge { height: 14px; border-radius: 999px; background: rgba(148,163,184,.16); overflow: hidden; margin-top: 8px; }
+    .gauge-fill {
+        height: 100%; border-radius: 999px;
+        background: linear-gradient(90deg, #22d3ee, #3b82f6);
+        box-shadow: 0 0 18px rgba(34,211,238,.5);
+        transform-origin: left center;
+        animation: grow 1s cubic-bezier(.22,.8,.28,1) both;
+    }
+    @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
+
+    .top3 { margin-top: 24px; }
+    .top3-title { color: var(--muted); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+    .rank {
+        display: flex; align-items: center; gap: 12px;
+        padding: 11px 14px; margin-bottom: 9px;
+        background: rgba(148,163,184,.05);
+        border: 1px solid rgba(148,163,184,.12);
+        border-radius: 14px;
+    }
+    .rank-badge { width: 24px; height: 24px; flex: none; border-radius: 8px; display: grid; place-items: center; font-size: .74rem; font-weight: 700; color: #d9e6f8; background: rgba(148,163,184,.16); }
+    .rank-name { flex: 1; font-weight: 600; color: #eaf3ff; }
+    .rank-pct { font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent); }
+    .rank-bar { width: 120px; height: 7px; border-radius: 999px; background: rgba(148,163,184,.16); overflow: hidden; flex: none; }
+    .rank-bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #22d3ee, #3b82f6); }
+
+    /* Alertas */
+    .stAlert { border-radius: 16px !important; padding: 14px 16px !important; border: 1px solid transparent !important; }
+    [data-testid="stAlert"] { border-radius: 16px !important; }
+    .stAlert [data-testid="stMarkdownContainer"] p { color: var(--text) !important; }
+
+    /* ===== MÉTRICAS INFERIORES ===== */
     .metric {
-        border: 1px solid rgba(96,165,250,.16);
-        border-radius: 16px;
-        padding: 14px 16px;
-        background: rgba(96,165,250,.06);
+        border: 1px solid var(--line);
+        border-radius: 20px;
+        padding: 22px 24px;
+        background: linear-gradient(160deg, rgba(18,31,56,.74), rgba(10,20,38,.62));
+        box-shadow: 0 16px 40px rgba(2,6,14,.34);
+        height: 100%;
     }
+    .metric .m-top { display: flex; align-items: center; gap: 12px; }
+    .metric .m-icon { font-size: 1.5rem; }
+    .metric .m-title { font-family: 'Space Grotesk'; font-weight: 700; color: #f4f9ff; font-size: 1rem; }
+    .metric .m-tag { color: var(--accent); font-size: .86rem; font-weight: 600; }
+    .metric .m-sub { color: var(--muted); font-size: .85rem; margin-top: 8px; line-height: 1.5; }
 
-    .small-note {
-        color: #91a6bf;
-        font-size: .82rem;
-        line-height: 1.5;
-    }
+    .footer { text-align: center; color: #6f83a3; font-size: .8rem; margin-top: 30px; }
+    .foot-brand { color: #9fc1ff; font-weight: 500; }
 
-    div[data-testid="stFileUploader"] {
-        background: rgba(255,255,255,.018);
-        border-radius: 18px;
-        padding: 8px;
+    .image-card {
+        border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
+        box-shadow: 0 20px 48px rgba(2,6,14,.45); margin-top: 16px;
     }
+    .image-card img { display: block; width: 100%; }
+    .img-caption { padding: 10px 16px; color: var(--muted); font-size: .8rem; background: rgba(8,15,28,.6); }
 
-    .footer {
-        text-align:center;
-        color:#7185a1;
-        font-size:.82rem;
-        margin-top:28px;
-    }
+    @media (prefers-reduced-motion: reduce) { .gauge-fill { animation: none; } }
     </style>
     """,
     unsafe_allow_html=True,
@@ -198,12 +332,23 @@ model = load_model()
 st.markdown(
     """
     <div class="hero">
-        <span class="badge">EXAMEN · COMPUTACIÓN EN LA NUBE · UTH</span>
-        <h1>🔎 CIFAR Vision</h1>
-        <p>
-            Clasificación de imágenes con una red neuronal convolucional (CNN)
-            entrenada con CIFAR-10 y desplegada como aplicación web mediante Streamlit.
-        </p>
+        <div class="hero-top">
+            <div class="logo-mark">
+                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                    <circle cx="11" cy="11" r="7"></circle>
+                    <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
+                    <circle cx="11" cy="11" r="2.4" fill="#22d3ee" stroke="none"></circle>
+                </svg>
+            </div>
+            <span class="badge">UTH · Computación en la Nube</span>
+        </div>
+        <h1>CIFAR <span class="accent">Vision</span></h1>
+        <p class="hero-sub">Clasificación inteligente de imágenes con CNN</p>
+        <div class="hero-foot">
+            <span><i class="dot"></i>Red Neuronal Convolucional</span>
+            <span><i class="dot"></i>Dataset CIFAR-10</span>
+            <span><i class="dot"></i>Deploy en Streamlit Cloud</span>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,
@@ -221,12 +366,19 @@ if model is None:
 # SIDEBAR
 # ============================================================
 with st.sidebar:
-    st.markdown("## ⚙️ Control")
+    st.markdown('<div class="side-brand">🔎 CIFAR Vision</div>', unsafe_allow_html=True)
+    st.markdown('<div class="side-sub">Estudio de clasificación de imágenes</div>', unsafe_allow_html=True)
+    st.markdown("---")
+
+    st.markdown('<div class="side-title">Fuente de imagen</div>', unsafe_allow_html=True)
     mode = st.radio(
         "Fuente de imagen",
         ["📁 Subir imagen", "📷 Usar cámara"],
         index=0,
+        label_visibility="collapsed",
     )
+
+    st.markdown('<div class="side-title">Resultados</div>', unsafe_allow_html=True)
     show_top3 = st.toggle("Mostrar Top-3", value=True)
     threshold = st.slider(
         "Umbral de confianza",
@@ -237,11 +389,15 @@ with st.sidebar:
     )
 
     st.markdown("---")
-    st.markdown("### 🧠 Modelo")
-    st.caption("CNN convolucional · CIFAR-10")
-    st.caption("Entrada esperada: 32 × 32 × 3")
-    st.caption("10 clases")
-
+    st.markdown('<div class="side-title">Modelo</div>', unsafe_allow_html=True)
+    st.markdown(
+        '<div class="model-chip"><span class="dot"></span>CNN convolucional · CIFAR-10</div>',
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        '<div class="model-chip"><span class="dot"></span>Entrada 32 × 32 × 3 · 10 clases</div>',
+        unsafe_allow_html=True,
+    )
 # ============================================================
 # ENTRADA
 # ============================================================
@@ -249,7 +405,8 @@ left, right = st.columns([1.05, 1], gap="large")
 
 with left:
     st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown("### 1. Selecciona una imagen")
+    st.markdown('<span class="section-step">01 · Captura</span>', unsafe_allow_html=True)
+    st.markdown("### Seleccionar imagen")
 
     image_file = None
     if mode == "📁 Subir imagen":
@@ -266,24 +423,23 @@ with left:
         )
 
     st.markdown(
-        '<p class="small-note">Consejo: para mejores resultados, utiliza una imagen donde el objeto principal sea claramente visible.</p>',
+        "<p style='color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:14px;'>"
+        "Para mejores resultados, usa una imagen donde el objeto principal sea claramente visible.</p>",
         unsafe_allow_html=True,
     )
     st.markdown("</div>", unsafe_allow_html=True)
 
 with right:
     st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown("### 2. Predicción")
+    st.markdown('<span class="section-step">02 · Resultado</span>', unsafe_allow_html=True)
+    st.markdown("### Predicción")
 
     if image_file is None:
         st.info("Sube una imagen o toma una fotografía para comenzar.")
         st.markdown(
-            """
-            <div class="mini">
-                El flujo es sencillo: imagen → preprocesamiento → CNN → clase
-                predicha + confianza + alternativas.
-            </div>
-            """,
+            "<p style='color:var(--muted);font-size:.9rem;line-height:1.6;margin-top:12px;'>"
+            "El flujo es sencillo: imagen → preprocesamiento → CNN → "
+            "clase predicha + confianza + alternativas.</p>",
             unsafe_allow_html=True,
         )
     else:
@@ -302,15 +458,6 @@ with right:
             best_class = CLASS_NAMES[best_idx]
             confidence = float(probabilities[best_idx])
 
-            st.markdown(
-                f'<div class="result-title">{CLASS_EMOJIS[best_class]} {best_class}</div>',
-                unsafe_allow_html=True,
-            )
-            st.markdown(
-                f'<div class="confidence">Confianza: {confidence:.2%}</div>',
-                unsafe_allow_html=True,
-            )
-
             if confidence >= threshold:
                 st.success("Predicción aceptada por el umbral configurado.")
             else:
@@ -319,14 +466,47 @@ with right:
                     "pero esta imagen puede estar fuera de su distribución."
                 )
 
+            st.markdown(
+                f"""
+                <div class="result-class-row">
+                    <div class="result-emoji">{CLASS_EMOJIS[best_class]}</div>
+                    <div>
+                        <div class="result-label">Predicción principal</div>
+                        <div class="result-class">{best_class}</div>
+                    </div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+            st.markdown(
+                f"""
+                <div class="conf-line">
+                    <span class="conf-label">Confianza del modelo</span>
+                    <span class="conf-value">{confidence:.2%}</span>
+                </div>
+                <div class="gauge"><div class="gauge-fill" style="width:{confidence * 100:.2f}%"></div></div>
+                """,
+                unsafe_allow_html=True,
+            )
+
             if show_top3:
-                st.markdown("#### Otras posibilidades")
+                st.markdown(
+                    "<div class='top3-title'>Otras posibilidades · Top-3</div>",
+                    unsafe_allow_html=True,
+                )
                 for rank, idx in enumerate(order[:3], start=1):
                     name = CLASS_NAMES[int(idx)]
                     prob = float(probabilities[int(idx)])
-                    st.progress(
-                        prob,
-                        text=f"{rank}. {CLASS_EMOJIS[name]} {name} · {prob:.2%}",
+                    st.markdown(
+                        f"""
+                        <div class="rank">
+                            <div class="rank-badge">{rank}</div>
+                            <div class="rank-name">{CLASS_EMOJIS[name]} {name}</div>
+                            <div class="rank-bar"><i style="width:{prob * 100:.2f}%"></i></div>
+                            <div class="rank-pct">{prob:.2%}</div>
+                        </div>
+                        """,
+                        unsafe_allow_html=True,
                     )
 
         except Exception as exc:
@@ -340,43 +520,33 @@ with right:
 st.markdown("")
 info1, info2, info3 = st.columns(3)
 
-with info1:
-    st.markdown(
-        """
-        <div class="metric">
-            <strong>📦 Dataset</strong><br>
-            <span class="mini">CIFAR-10 · 10 clases · imágenes RGB 32×32</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+metrics = [
+    ("🗂️", "Dataset", "CIFAR-10", "10 clases · imágenes RGB de 32 × 32 píxeles · 50k imágenes de entrenamiento"),
+    ("🧠", "Modelo", "CNN", "Red neuronal convolucional entrenada en Google Colab con GPU · accuracy 62.18%"),
+    ("☁️", "Deploy", "Streamlit Cloud", "Aplicación web desplegada en la nube y accesible desde cualquier navegador"),
+]
 
-with info2:
-    st.markdown(
-        """
-        <div class="metric">
-            <strong>🧠 IA</strong><br>
-            <span class="mini">Red neuronal convolucional entrenada en Google Colab</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
-
-with info3:
-    st.markdown(
-        """
-        <div class="metric">
-            <strong>☁️ Nube</strong><br>
-            <span class="mini">Aplicación lista para Streamlit Community Cloud</span>
-        </div>
-        """,
-        unsafe_allow_html=True,
-    )
+for col, (icon, title, tag, sub) in zip([info1, info2, info3], metrics):
+    with col:
+        st.markdown(
+            f"""
+            <div class="metric">
+                <div class="m-top">
+                    <span class="m-icon">{icon}</span>
+                    <div>
+                        <div class="m-title">{title} · <span class="m-tag">{tag}</span></div>
+                    </div>
+                </div>
+                <div class="m-sub">{sub}</div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
 
 st.markdown(
     """
     <div class="footer">
-        Proyecto académico · Computación en la Nube · UTH
+        Proyecto académico · <span class="foot-brand">CIFAR Vision</span> · Computación en la Nube · UTH
     </div>
     """,
     unsafe_allow_html=True,

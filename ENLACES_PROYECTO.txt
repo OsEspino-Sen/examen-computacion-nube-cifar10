@@ -1,0 +1,17 @@
+PROYECTO FINAL - COMPUTACIÓN EN LA NUBE | UTH
+
+
+REPOSITORIO GITHUB
+https://github.com/OsEspino-Sen/examen-computacion-nube-cifar10
+
+
+APLICACIÓN STREAMLIT
+https://examen-computacion-nube-oscarespino.streamlit.app/
+
+
+MODELO
+Clasificación de imágenes mediante CNN utilizando CIFAR-10.
+
+
+ACCURACY DEL MODELO
+62.18%
