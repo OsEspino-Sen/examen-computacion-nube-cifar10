@@ -46,268 +46,350 @@ CLASS_EMOJIS = {
 }
 
 # ============================================================
-# ESTILOS — Interfaz de visión artificial premium
+# ESTILOS — Tema claro profesional
 # ============================================================
 st.markdown(
     """
     <style>
-    @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Space+Grotesk:wght@500;600;700&display=swap');
+    @import url('https://fonts.googleapis.com/css2?family=Sora:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@500;600&display=swap');
 
     :root {
-        --bg: #060d1a;
-        --panel: rgba(15, 26, 46, .55);
-        --panel-solid: #0d1730;
-        --line: rgba(125, 211, 252, .12);
-        --line-strong: rgba(34, 211, 238, .30);
-        --text: #eaf3ff;
-        --muted: #93a7c7;
-        --accent: #22d3ee;
-        --accent-2: #3b82f6;
-        --valid: #34d399;
-        --warn: #fbbf24;
-        --danger: #f87171;
+        --bg: #f5f7fb;
+        --surface: #ffffff;
+        --surface-2: #f8fafc;
+        --border: #dfe5ef;
+        --border-strong: #c0cde0;
+        --text: #14213d;
+        --muted: #5b6b85;
+        --accent: #2563eb;
+        --accent-soft: #eff4ff;
+        --accent-border: #dbe7ff;
+        --valid: #16a34a;
+        --warn: #d97706;
+        --danger: #dc2626;
+        --shadow: 0 1px 2px rgba(16, 24, 40, .05), 0 8px 24px rgba(16, 24, 40, .06);
     }
 
     .stApp {
         background:
-            radial-gradient(1150px 520px at 12% -6%, rgba(59,130,246,.17), transparent 55%),
-            radial-gradient(950px 480px at 90% 8%, rgba(34,211,238,.10), transparent 50%),
-            radial-gradient(1200px 720px at 50% 112%, rgba(59,130,246,.09), transparent 62%),
-            linear-gradient(180deg, #050b16 0%, #060d1a 55%, #050a14 100%);
+            radial-gradient(900px 400px at 50% -6%, rgba(37, 99, 235, .05), transparent 60%),
+            var(--bg);
         color: var(--text);
     }
 
     .block-container {
-        max-width: 1220px;
-        padding-top: 2.1rem;
+        max-width: 1180px;
+        padding-top: 1.8rem;
         padding-bottom: 2.4rem;
     }
 
     [data-testid="stHeader"] { background: transparent; }
 
     ::-webkit-scrollbar { width: 10px; height: 10px; }
-    ::-webkit-scrollbar-thumb { background: rgba(148,163,184,.22); border-radius: 999px; }
+    ::-webkit-scrollbar-thumb { background: var(--border-strong); border-radius: 999px; }
     ::-webkit-scrollbar-track { background: transparent; }
 
     .stApp, .stMarkdown p, .stMarkdown li {
         font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
-    h1, h2, h3, .card h3, .hero h1 {
-        font-family: 'Space Grotesk', 'Inter', sans-serif;
+    .stMarkdown p, .stMarkdown li { color: var(--text); }
+    h1, h2, h3, .brand-name, .result-class, .metric .m-title, .side-brand, .section-title, .empty-state .es-title {
+        font-family: 'Sora', 'Inter', sans-serif;
         letter-spacing: -.01em;
     }
+    .conf-value, .rank-pct, .m-tag, .badge, .step-num, .es-flow {
+        font-family: 'JetBrains Mono', monospace;
+        font-variant-numeric: tabular-nums;
+    }
 
-    /* ===== HERO ===== */
-    .hero {
+    /* ===== BARRA SUPERIOR ===== */
+    .topbar {
         position: relative;
         overflow: hidden;
-        padding: 40px 44px 36px;
-        border: 1px solid var(--line);
-        border-radius: 28px;
-        background: linear-gradient(135deg, rgba(16,28,52,.86), rgba(9,18,36,.74));
-        box-shadow: 0 30px 70px rgba(2,6,14,.5), inset 0 1px 0 rgba(255,255,255,.04);
-        margin-bottom: 26px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        flex-wrap: wrap;
+        padding: 16px 22px;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        box-shadow: var(--shadow);
+        margin-bottom: 22px;
     }
-    .hero::before {
+    .topbar::before {
         content: "";
-        position: absolute; top: -150px; right: -130px;
-        width: 400px; height: 400px;
-        background: radial-gradient(circle, rgba(34,211,238,.18), transparent 62%);
-        pointer-events: none;
+        position: absolute; top: 0; left: 0; right: 0; height: 3px;
+        background: linear-gradient(90deg, #2563eb, #38bdf8);
     }
-    .hero::after {
-        content: "";
-        position: absolute; bottom: -170px; left: -110px;
-        width: 380px; height: 380px;
-        background: radial-gradient(circle, rgba(59,130,246,.15), transparent 62%);
-        pointer-events: none;
-    }
-    .hero-top { position: relative; display: flex; align-items: center; gap: 16px; }
+    .brand { display: flex; align-items: center; gap: 14px; }
     .logo-mark {
-        width: 58px; height: 58px; border-radius: 18px;
+        width: 44px; height: 44px; border-radius: 12px;
         display: grid; place-items: center; flex: none;
-        background: linear-gradient(135deg, rgba(34,211,238,.22), rgba(59,130,246,.16));
-        border: 1px solid var(--line-strong);
-        box-shadow: 0 12px 30px rgba(34,211,238,.16);
+        background: var(--accent-soft);
+        border: 1px solid var(--accent-border);
     }
+    .brand-name { font-size: 1.22rem; font-weight: 700; color: var(--text); }
+    .brand-name .accent { color: var(--accent); }
+    .brand-sub { font-size: .8rem; color: var(--muted); }
+    .topbar-right { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
     .badge {
-        display: inline-flex; align-items: center; gap: 8px;
-        padding: 8px 14px; border-radius: 999px;
-        color: #c5fbff;
-        background: rgba(34,211,238,.10);
-        border: 1px solid rgba(34,211,238,.28);
-        font-size: .76rem; font-weight: 600;
-        letter-spacing: .06em; text-transform: uppercase;
+        display: inline-flex; align-items: center; gap: 6px;
+        padding: 6px 12px; border-radius: 999px;
+        background: var(--surface-2); border: 1px solid var(--border);
+        color: var(--muted); font-size: .72rem; font-weight: 600;
+        letter-spacing: .04em; text-transform: uppercase;
     }
-    .hero h1 {
-        position: relative;
-        font-size: clamp(2.3rem, 4.5vw, 3.5rem);
-        line-height: 1.02; margin: 22px 0 10px;
-        color: #f7fbff; font-weight: 700;
-    }
-    .hero h1 .accent { color: var(--accent); }
-    .hero-sub {
-        position: relative;
-        color: var(--muted); font-size: 1.12rem; margin: 0;
-    }
-    .hero-foot {
-        position: relative;
-        display: flex; flex-wrap: wrap; gap: 8px 20px;
-        margin-top: 22px; color: #7f94b4; font-size: .82rem;
-    }
-    .hero-foot span { display: inline-flex; align-items: center; gap: 7px; }
-    .hero-foot .dot { width: 5px; height: 5px; border-radius: 50%; background: var(--accent); }
-    /* ===== CARDS / PANELES ===== */
-    .card {
-        background: linear-gradient(160deg, rgba(18,31,56,.82), rgba(10,20,38,.72));
-        border: 1px solid var(--line);
-        border-radius: 24px;
-        padding: 26px;
-        box-shadow: 0 24px 54px rgba(2,6,14,.42), inset 0 1px 0 rgba(255,255,255,.03);
-        height: 100%;
-    }
-    .card h3 { color: #f4f9ff; margin-top: 6px; }
-    .section-step {
-        display: inline-flex; align-items: center; gap: 8px;
-        color: var(--accent); font-size: .72rem; font-weight: 700;
-        letter-spacing: .08em; text-transform: uppercase;
+    .badge.accent {
+        background: var(--accent);
+        border-color: var(--accent);
+        color: #ffffff;
     }
 
-    /* Uploader */
-    [data-testid="stFileUploader"] { padding: 4px; }
+    /* ===== CABECERA DE SECCIÓN ===== */
+    .section-head { display: flex; align-items: center; gap: 14px; margin: 8px 0 18px; }
+    .section-title { color: var(--text); font-size: .95rem; font-weight: 600; }
+    .section-rule { flex: 1; height: 1px; background: var(--border); }
+
+    /* ===== CABECERA DE PASO (01 / 02) ===== */
+    .step-head { display: flex; align-items: center; gap: 14px; margin-bottom: 20px; }
+    .step-num {
+        width: 38px; height: 38px; flex: none; border-radius: 10px;
+        display: grid; place-items: center;
+        font-size: .8rem; font-weight: 600; color: #ffffff;
+        background: linear-gradient(135deg, #2563eb, #3b82f6);
+        box-shadow: 0 4px 12px rgba(37, 99, 235, .25);
+    }
+    .step-label { color: var(--muted); font-size: .68rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; }
+    .step-head h3 { margin: 2px 0 0; font-size: 1.1rem; color: var(--text); }
+
+    /* ===== CARDS / PANELES (contenedor nativo de Streamlit) ===== */
+    [data-testid="stVerticalBlockBorderWrapper"] {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 16px;
+        padding: 26px;
+        box-shadow: var(--shadow);
+        height: 100%;
+        transition: border-color .2s ease;
+    }
+    [data-testid="stVerticalBlockBorderWrapper"]:hover { border-color: #cfd8e6; }
+    [data-testid="stVerticalBlockBorderWrapper"] > [data-testid="stVerticalBlock"] { gap: .4rem; }
+
+    /* Uploader con visor (viewfinder) */
+    [data-testid="stFileUploader"] { padding: 2px; }
     [data-testid="stFileUploaderDropzone"] {
-        background: linear-gradient(180deg, rgba(34,211,238,.05), rgba(255,255,255,.01)) !important;
-        border: 1.5px dashed rgba(34,211,238,.35) !important;
-        border-radius: 20px !important;
-        min-height: 250px;
+        position: relative;
+        background: #fbfcfe !important;
+        border: 1.5px dashed var(--border-strong) !important;
+        border-radius: 14px !important;
+        min-height: 200px;
         display: flex; align-items: center; justify-content: center;
         transition: border-color .2s ease, background .2s ease;
     }
     [data-testid="stFileUploaderDropzone"]:hover {
-        border-color: rgba(34,211,238,.65) !important;
-        background: rgba(34,211,238,.07) !important;
+        border-color: var(--accent) !important;
+        background: #f7faff !important;
+    }
+    [data-testid="stFileUploaderDropzone"]::before {
+        content: "";
+        position: absolute; inset: 12px; pointer-events: none; opacity: .55;
+        background:
+            linear-gradient(var(--accent), var(--accent)) top left / 20px 2px,
+            linear-gradient(var(--accent), var(--accent)) top left / 2px 20px,
+            linear-gradient(var(--accent), var(--accent)) top right / 20px 2px,
+            linear-gradient(var(--accent), var(--accent)) top right / 2px 20px,
+            linear-gradient(var(--accent), var(--accent)) bottom left / 20px 2px,
+            linear-gradient(var(--accent), var(--accent)) bottom left / 2px 20px,
+            linear-gradient(var(--accent), var(--accent)) bottom right / 20px 2px,
+            linear-gradient(var(--accent), var(--accent)) bottom right / 2px 20px;
+        background-repeat: no-repeat;
+    }
+    [data-testid="stFileUploader"] [data-testid*="baseButton"] {
+        background: linear-gradient(135deg, #2563eb, #3b82f6) !important;
+        color: #ffffff !important;
+        border: none !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        padding: 8px 16px !important;
     }
 
     /* Cámara */
     [data-testid="stCameraInput"] {
-        background: linear-gradient(160deg, rgba(18,31,56,.8), rgba(10,20,38,.7));
-        border: 1px solid var(--line);
-        border-radius: 20px; overflow: hidden; padding: 8px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 14px; overflow: hidden; padding: 8px;
     }
     [data-testid="stCameraInputButton"] {
-        background: linear-gradient(135deg, #22d3ee, #3b82f6) !important;
-        border: none !important; color: #04222b !important;
-        border-radius: 12px !important; font-weight: 700;
+        background: var(--accent) !important;
+        border: none !important; color: #ffffff !important;
+        border-radius: 10px !important; font-weight: 600;
     }
 
     /* Radio segmentada */
     [role="radiogroup"] { gap: 8px !important; }
     [role="radiogroup"] > label {
-        background: rgba(148,163,184,.05);
-        border: 1px solid rgba(148,163,184,.14);
+        background: var(--surface-2);
+        border: 1px solid var(--border);
         border-radius: 12px !important;
-        padding: 10px 14px;
-        transition: all .2s ease;
+        padding: 9px 13px;
+        color: var(--text);
+        transition: all .18s ease;
     }
-    [role="radiogroup"] > label:hover { border-color: rgba(34,211,238,.4); }
+    [role="radiogroup"] > label:hover { border-color: var(--accent); }
+    [role="radiogroup"] > label:has(input:checked) {
+        background: var(--accent-soft);
+        border-color: var(--accent);
+        color: #1d4ed8;
+        font-weight: 600;
+    }
     [role="radiogroup"] > label > [data-testid="stMarkdownContainer"] + div { display: none; }
 
     /* Slider y Toggle */
-    .stSlider [data-baseweb="slider"] div[role="slider"] { background: #22d3ee !important; }
-    .stSlider [data-testid="stSliderThumbValue"] { color: #cfe9ff !important; }
+    .stSlider [data-baseweb="slider"] div[role="slider"] { background: var(--accent) !important; }
+    .stSlider [data-testid="stSliderThumbValue"] { color: var(--text) !important; }
     .stCheckbox label span:first-child { border-radius: 999px !important; }
+    .stCheckbox label, .stToggle label, .stSlider label { color: var(--text) !important; }
+    [data-testid="stToggle"] input:checked + span {
+        background: var(--accent) !important;
+    }
+    [data-testid="stToggle"] input:checked + span span {
+        background: #ffffff !important;
+    }
 
     /* Sidebar */
     [data-testid="stSidebar"] {
-        background: linear-gradient(180deg, rgba(8,15,28,.96), rgba(6,12,23,.96));
-        border-right: 1px solid var(--line);
+        background: var(--surface);
+        border-right: 1px solid var(--border);
     }
     [data-testid="stSidebar"] .block-container { padding-top: 1.6rem; padding-bottom: 2rem; }
+    [data-testid="stSidebar"] hr { border-color: var(--border); margin: 16px 0; }
     .side-brand {
         display: inline-flex; align-items: center; gap: 10px;
-        font-family: 'Space Grotesk'; font-size: 1.18rem; font-weight: 700; color: #f4f9ff;
+        font-size: 1.05rem; font-weight: 700; color: var(--text);
     }
-    .side-sub { color: var(--muted); font-size: .85rem; margin: 2px 0 20px; }
+    .side-sub { color: var(--muted); font-size: .82rem; margin: 2px 0 16px; }
     .side-title {
-        color: var(--muted); font-size: .72rem; font-weight: 700;
-        letter-spacing: .08em; text-transform: uppercase; margin: 4px 0 8px;
+        color: var(--muted); font-size: .68rem; font-weight: 600;
+        letter-spacing: .1em; text-transform: uppercase; margin: 2px 0 8px;
     }
     .model-chip {
         display: flex; align-items: center; gap: 10px;
-        padding: 10px 12px; border-radius: 14px;
-        background: rgba(34,211,238,.06); border: 1px solid rgba(34,211,238,.18);
-        font-size: .82rem; color: #cfe9ff; margin-bottom: 8px;
+        padding: 9px 12px; border-radius: 10px;
+        background: var(--surface-2); border: 1px solid var(--border);
+        font-size: .8rem; color: #44536e; margin-bottom: 8px;
     }
-    .model-chip .dot { width: 8px; height: 8px; border-radius: 50%; background: var(--valid); box-shadow: 0 0 10px var(--valid); }
+    .model-chip .dot { width: 7px; height: 7px; border-radius: 50%; background: var(--valid); }
+
+    /* ===== ESTADO VACÍO ===== */
+    .empty-state {
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 34px 24px;
+        background: var(--surface-2);
+        text-align: center;
+    }
+    .empty-state .es-icon { font-size: 1.9rem; }
+    .empty-state .es-title { font-weight: 600; color: var(--text); font-size: .95rem; margin: 12px 0 6px; }
+    .empty-state .es-sub { color: var(--muted); font-size: .86rem; line-height: 1.55; margin: 0; }
+    .empty-state .es-flow {
+        display: inline-flex; align-items: center; justify-content: center; flex-wrap: wrap; gap: 8px;
+        margin-top: 18px; padding: 8px 14px; border-radius: 999px;
+        background: var(--surface); border: 1px solid var(--border);
+        color: var(--muted); font-size: .72rem;
+    }
+    .es-flow .arrow { color: var(--accent); }
+
+    /* ===== VISTA PREVIA ===== */
+    .preview-wrap { margin-top: 18px; }
+    [data-testid="stImage"] img {
+        border-radius: 12px;
+        border: 1px solid var(--border);
+    }
+    .preview-empty {
+        margin-top: 18px;
+        border: 1px dashed var(--border-strong);
+        border-radius: 14px;
+        min-height: 200px;
+        display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 6px;
+        background: #fbfcfe;
+        color: var(--muted); text-align: center; padding: 20px;
+    }
+    .preview-empty .pe-icon { font-size: 1.7rem; opacity: .8; }
+    .preview-empty .pe-title { font-weight: 600; color: var(--text); font-size: .92rem; }
+    .preview-empty .pe-sub { font-size: .84rem; }
 
     /* ===== RESULTADO ===== */
-    .result-class-row { display: flex; align-items: center; gap: 16px; margin: 6px 0 20px; }
+    .result-class-row { display: flex; align-items: center; gap: 16px; margin: 6px 0 22px; }
     .result-emoji {
-        width: 66px; height: 66px; border-radius: 20px; flex: none;
-        display: grid; place-items: center; font-size: 2.1rem;
-        background: linear-gradient(135deg, rgba(34,211,238,.18), rgba(59,130,246,.12));
-        border: 1px solid var(--line-strong);
-        box-shadow: 0 12px 28px rgba(34,211,238,.14);
+        width: 62px; height: 62px; border-radius: 16px; flex: none;
+        display: grid; place-items: center; font-size: 1.9rem;
+        background: var(--accent-soft);
+        border: 1px solid var(--accent-border);
     }
-    .result-label { color: var(--muted); font-size: .72rem; letter-spacing: .08em; text-transform: uppercase; font-weight: 700; }
-    .result-class { font-family: 'Space Grotesk'; font-size: 2.1rem; font-weight: 700; color: #f7fbff; line-height: 1.05; }
+    .result-label { color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; }
+    .result-class { font-size: 1.9rem; font-weight: 700; color: var(--text); line-height: 1.08; }
     .conf-line { display: flex; justify-content: space-between; align-items: baseline; width: 100%; }
-    .conf-label { color: var(--muted); font-size: .9rem; }
-    .conf-value { font-family: 'Space Grotesk'; font-size: 1.9rem; font-weight: 700; color: var(--accent); }
-    .gauge { height: 14px; border-radius: 999px; background: rgba(148,163,184,.16); overflow: hidden; margin-top: 8px; }
+    .conf-label { color: var(--muted); font-size: .86rem; }
+    .conf-value { font-size: 1.7rem; font-weight: 600; color: var(--accent); }
+    .gauge { height: 10px; border-radius: 999px; background: #e8edf5; overflow: hidden; margin-top: 10px; }
     .gauge-fill {
         height: 100%; border-radius: 999px;
-        background: linear-gradient(90deg, #22d3ee, #3b82f6);
-        box-shadow: 0 0 18px rgba(34,211,238,.5);
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
         transform-origin: left center;
-        animation: grow 1s cubic-bezier(.22,.8,.28,1) both;
+        animation: grow 1s cubic-bezier(.22, .8, .28, 1) both;
     }
     @keyframes grow { from { transform: scaleX(0); } to { transform: scaleX(1); } }
 
     .top3 { margin-top: 24px; }
-    .top3-title { color: var(--muted); font-size: .78rem; letter-spacing: .06em; text-transform: uppercase; font-weight: 700; margin-bottom: 12px; }
+    .top3-title { color: var(--muted); font-size: .68rem; letter-spacing: .12em; text-transform: uppercase; font-weight: 600; margin-bottom: 12px; }
     .rank {
         display: flex; align-items: center; gap: 12px;
-        padding: 11px 14px; margin-bottom: 9px;
-        background: rgba(148,163,184,.05);
-        border: 1px solid rgba(148,163,184,.12);
-        border-radius: 14px;
+        padding: 10px 13px; margin-bottom: 8px;
+        background: var(--surface-2);
+        border: 1px solid var(--border);
+        border-radius: 12px;
+        transition: border-color .18s ease;
     }
-    .rank-badge { width: 24px; height: 24px; flex: none; border-radius: 8px; display: grid; place-items: center; font-size: .74rem; font-weight: 700; color: #d9e6f8; background: rgba(148,163,184,.16); }
-    .rank-name { flex: 1; font-weight: 600; color: #eaf3ff; }
-    .rank-pct { font-family: 'Space Grotesk'; font-weight: 700; color: var(--accent); }
-    .rank-bar { width: 120px; height: 7px; border-radius: 999px; background: rgba(148,163,184,.16); overflow: hidden; flex: none; }
-    .rank-bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #22d3ee, #3b82f6); }
+    .rank:hover { border-color: #b9c9f0; }
+    .rank-badge {
+        width: 24px; height: 24px; flex: none; border-radius: 8px;
+        display: grid; place-items: center; font-size: .7rem; font-weight: 600;
+        color: var(--muted); background: #e6ecf7;
+    }
+    .rank-name { flex: 1; font-weight: 500; color: var(--text); }
+    .rank-pct { font-size: .85rem; font-weight: 600; color: var(--accent); }
+    .rank-bar { width: 110px; height: 6px; border-radius: 999px; background: #e8edf5; overflow: hidden; flex: none; }
+    .rank-bar > i { display: block; height: 100%; border-radius: 999px; background: linear-gradient(90deg, #2563eb, #3b82f6); }
 
     /* Alertas */
-    .stAlert { border-radius: 16px !important; padding: 14px 16px !important; border: 1px solid transparent !important; }
-    [data-testid="stAlert"] { border-radius: 16px !important; }
-    .stAlert [data-testid="stMarkdownContainer"] p { color: var(--text) !important; }
+    .stAlert { border-radius: 12px !important; padding: 13px 15px !important; border: 1px solid transparent !important; }
+    [data-testid="stAlert"] { border-radius: 12px !important; }
 
     /* ===== MÉTRICAS INFERIORES ===== */
     .metric {
-        border: 1px solid var(--line);
-        border-radius: 20px;
-        padding: 22px 24px;
-        background: linear-gradient(160deg, rgba(18,31,56,.74), rgba(10,20,38,.62));
-        box-shadow: 0 16px 40px rgba(2,6,14,.34);
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 20px 22px;
+        box-shadow: var(--shadow);
         height: 100%;
+        transition: border-color .2s ease;
     }
+    .metric:hover { border-color: #c9d4e4; }
     .metric .m-top { display: flex; align-items: center; gap: 12px; }
-    .metric .m-icon { font-size: 1.5rem; }
-    .metric .m-title { font-family: 'Space Grotesk'; font-weight: 700; color: #f4f9ff; font-size: 1rem; }
-    .metric .m-tag { color: var(--accent); font-size: .86rem; font-weight: 600; }
-    .metric .m-sub { color: var(--muted); font-size: .85rem; margin-top: 8px; line-height: 1.5; }
-
-    .footer { text-align: center; color: #6f83a3; font-size: .8rem; margin-top: 30px; }
-    .foot-brand { color: #9fc1ff; font-weight: 500; }
-
-    .image-card {
-        border: 1px solid var(--line); border-radius: 20px; overflow: hidden;
-        box-shadow: 0 20px 48px rgba(2,6,14,.45); margin-top: 16px;
+    .metric .m-icon {
+        width: 40px; height: 40px; flex: none; border-radius: 10px;
+        display: grid; place-items: center; font-size: 1.1rem;
+        background: var(--accent-soft); border: 1px solid var(--accent-border);
     }
-    .image-card img { display: block; width: 100%; }
-    .img-caption { padding: 10px 16px; color: var(--muted); font-size: .8rem; background: rgba(8,15,28,.6); }
+    .metric .m-title { font-weight: 600; color: var(--text); font-size: .95rem; }
+    .metric .m-tag { color: var(--accent); font-size: .74rem; font-weight: 500; }
+    .metric .m-sub { color: var(--muted); font-size: .83rem; margin-top: 10px; line-height: 1.55; }
+
+    .footer { text-align: center; color: #94a3b8; font-size: .78rem; margin-top: 32px; }
+    .foot-brand { color: var(--accent); font-weight: 500; }
 
     @media (prefers-reduced-motion: reduce) { .gauge-fill { animation: none; } }
     </style>
@@ -327,27 +409,27 @@ def load_model():
 model = load_model()
 
 # ============================================================
-# CABECERA
+# BARRA SUPERIOR
 # ============================================================
 st.markdown(
     """
-    <div class="hero">
-        <div class="hero-top">
+    <div class="topbar">
+        <div class="brand">
             <div class="logo-mark">
-                <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="#22d3ee" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
+                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="#2563eb" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">
                     <circle cx="11" cy="11" r="7"></circle>
                     <line x1="21" y1="21" x2="16.5" y2="16.5"></line>
-                    <circle cx="11" cy="11" r="2.4" fill="#22d3ee" stroke="none"></circle>
+                    <circle cx="11" cy="11" r="2.4" fill="#2563eb" stroke="none"></circle>
                 </svg>
             </div>
-            <span class="badge">UTH · Computación en la Nube</span>
+            <div>
+                <div class="brand-name">CIFAR <span class="accent">Vision</span></div>
+                <div class="brand-sub">Clasificación de imágenes con CNN · CIFAR-10</div>
+            </div>
         </div>
-        <h1>CIFAR <span class="accent">Vision</span></h1>
-        <p class="hero-sub">Clasificación inteligente de imágenes con CNN</p>
-        <div class="hero-foot">
-            <span><i class="dot"></i>Red Neuronal Convolucional</span>
-            <span><i class="dot"></i>Dataset CIFAR-10</span>
-            <span><i class="dot"></i>Deploy en Streamlit Cloud</span>
+        <div class="topbar-right">
+            <span class="badge">UTH · Computación en la Nube</span>
+            <span class="badge accent">Streamlit Cloud</span>
         </div>
     </div>
     """,
@@ -398,55 +480,109 @@ with st.sidebar:
         '<div class="model-chip"><span class="dot"></span>Entrada 32 × 32 × 3 · 10 clases</div>',
         unsafe_allow_html=True,
     )
+
 # ============================================================
-# ENTRADA
+# ENTRADA Y PREDICCIÓN — dos paneles balanceados
 # ============================================================
-left, right = st.columns([1.05, 1], gap="large")
+left, right = st.columns(2, gap="large")
 
 with left:
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<span class="section-step">01 · Captura</span>', unsafe_allow_html=True)
-    st.markdown("### Seleccionar imagen")
-
-    image_file = None
-    if mode == "📁 Subir imagen":
-        image_file = st.file_uploader(
-            "JPG, JPEG o PNG",
-            type=["jpg", "jpeg", "png"],
-            max_upload_size=20,
-            label_visibility="collapsed",
-        )
-    else:
-        image_file = st.camera_input(
-            "Toma una fotografía",
-            resolution="720p",
-        )
-
-    st.markdown(
-        "<p style='color:var(--muted);font-size:.84rem;line-height:1.5;margin-top:14px;'>"
-        "Para mejores resultados, usa una imagen donde el objeto principal sea claramente visible.</p>",
-        unsafe_allow_html=True,
-    )
-    st.markdown("</div>", unsafe_allow_html=True)
-
-with right:
-    st.markdown('<div class="card">', unsafe_allow_html=True)
-    st.markdown('<span class="section-step">02 · Resultado</span>', unsafe_allow_html=True)
-    st.markdown("### Predicción")
-
-    if image_file is None:
-        st.info("Sube una imagen o toma una fotografía para comenzar.")
+    with st.container(border=True):
         st.markdown(
-            "<p style='color:var(--muted);font-size:.9rem;line-height:1.6;margin-top:12px;'>"
-            "El flujo es sencillo: imagen → preprocesamiento → CNN → "
-            "clase predicha + confianza + alternativas.</p>",
+            """
+            <div class="step-head">
+                <div class="step-num">01</div>
+                <div>
+                    <div class="step-label">Captura</div>
+                    <h3>Seleccionar imagen</h3>
+                </div>
+            </div>
+            """,
             unsafe_allow_html=True,
         )
-    else:
-        try:
-            image = Image.open(io.BytesIO(image_file.getvalue())).convert("RGB")
-            st.image(image, caption="Imagen analizada", width="stretch")
 
+        image_file = None
+        if mode == "📁 Subir imagen":
+            image_file = st.file_uploader(
+                "JPG, JPEG o PNG",
+                type=["jpg", "jpeg", "png"],
+                max_upload_size=20,
+                label_visibility="collapsed",
+            )
+        else:
+            image_file = st.camera_input(
+                "Toma una fotografía",
+                resolution="720p",
+            )
+
+        st.markdown(
+            "<p style='color:var(--muted);font-size:.86rem;line-height:1.55;margin-top:12px;'>"
+            "Para mejores resultados, usa una imagen donde el objeto principal sea claramente visible.</p>",
+            unsafe_allow_html=True,
+        )
+
+        image = None
+        image_error = None
+        if image_file is not None:
+            try:
+                image = Image.open(io.BytesIO(image_file.getvalue())).convert("RGB")
+            except Exception as exc:
+                image_error = exc
+
+        if image is not None:
+            st.image(image, caption="Imagen analizada", width="stretch")
+        elif image_file is None:
+            st.markdown(
+                """
+                <div class="preview-empty">
+                    <div class="pe-icon">🖼️</div>
+                    <div class="pe-title">Vista previa</div>
+                    <div class="pe-sub">Tu imagen aparecerá aquí</div>
+                </div>
+                """,
+                unsafe_allow_html=True,
+            )
+
+with right:
+    with st.container(border=True):
+        st.markdown(
+            """
+            <div class="step-head">
+                <div class="step-num">02</div>
+                <div>
+                    <div class="step-label">Resultado</div>
+                    <h3>Predicción</h3>
+                </div>
+            </div>
+            """,
+            unsafe_allow_html=True,
+        )
+
+        if image is None:
+            if image_file is not None:
+                st.error(f"No se pudo procesar la imagen: {image_error}")
+            else:
+                st.markdown(
+                    """
+                    <div class="empty-state">
+                        <div class="es-icon">📊</div>
+                        <div class="es-title">Esperando imagen</div>
+                        <p class="es-sub">Sube una imagen o toma una fotografía para comenzar.<br>
+                        El análisis se mostrará automáticamente aquí.</p>
+                        <div class="es-flow">
+                            <span>imagen</span>
+                            <span class="arrow">→</span>
+                            <span>preprocesamiento</span>
+                            <span class="arrow">→</span>
+                            <span>CNN</span>
+                            <span class="arrow">→</span>
+                            <span>predicción</span>
+                        </div>
+                    </div>
+                    """,
+                    unsafe_allow_html=True,
+                )
+        else:
             # CIFAR-10 usa imágenes RGB de 32x32.
             resized = image.resize((32, 32), Image.Resampling.LANCZOS)
             x = np.asarray(resized, dtype=np.float32)
@@ -509,15 +645,18 @@ with right:
                         unsafe_allow_html=True,
                     )
 
-        except Exception as exc:
-            st.error(f"No se pudo procesar la imagen: {exc}")
-
-    st.markdown("</div>", unsafe_allow_html=True)
-
 # ============================================================
 # INFORMACIÓN DEL PROYECTO
 # ============================================================
-st.markdown("")
+st.markdown(
+    """
+    <div class="section-head">
+        <span class="section-title">Sobre el proyecto</span>
+        <span class="section-rule"></span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 info1, info2, info3 = st.columns(3)
 
 metrics = [
